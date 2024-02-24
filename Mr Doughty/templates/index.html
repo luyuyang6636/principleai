@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Check!</title>
+    <style>
+        label {
+            margin-right: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lesson Check</h1>
+    <form action="/analyze" method="post">
+        <label for="transcript">Enter Transcript:</label>
+        <textarea name="transcript" id="transcript" rows="10" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Analyze">
+    </form>
+
+    {{ result | safe }} <!-- Use the safe filter to render HTML as markup -->
+
+    {% if content %}
+        {% set question_number = 1 %}
+        {% for block in content %}
+            {% if block.type == 'multiple_choice_question' %}
+                <div class="question">
+                    <label>{{ question_number }}. {{ block.question }}</label>
+                    <input type="radio" id="question{{ question_number }}a" name="question{{ question_number }}" value="a">
+                    <label for="question{{ question_number }}a">a) {{ block.options[0] }}</label>
+                    <input type="radio" id="question{{ question_number }}b" name="question{{ question_number }}" value="b">
+                    <label for="question{{ question_number }}b">b) {{ block.options[1] }}</label>
+                    <input type="radio" id="question{{ question_number }}c" name="question{{ question_number }}" value="c">
+                    <label for="question{{ question_number }}c">c) {{ block.options[2] }}</label>
+                    <input type="radio" id="question{{ question_number }}d" name="question{{ question_number }}" value="d">
+                    <label for="question{{ question_number }}d">d) {{ block.options[3] }}</label>
+                </div>
+                {% set question_number = question_number + 1 %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <input type="submit" value="Submit Answers">
+</body>
+</html>
+
