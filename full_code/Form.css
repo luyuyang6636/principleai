@@ -1,0 +1,27 @@
+.form-input {
+  width: 38rem;
+  height: 30rem;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1.6px solid #000000;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+
+.form-input:focus {
+  outline: none;
+}
+
+.edit{
+  background-color: beige;
+  font-size: 0.875rem;
+  height: 27rem;
+}
+
+.test{
+  border: none;
+  background-color: beige;
+  font-size: 0.875rem;
+  height: 27rem;
+}
